@@ -33,5 +33,11 @@ namespace RiotSharp
         /// </summary>
         [JsonProperty("summonerLevel")]
         public long Level { get; set; }
+        
+        /// <summary>
+        /// Catch the response Error on GetResponse or GetResponseAsync
+        /// </summary>
+        [JsonProperty("Response")]
+        public string Response { get; set; }
     }
 }
