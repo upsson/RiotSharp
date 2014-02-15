@@ -29,6 +29,16 @@ To get a summoner:
   var summoner = api.GetSummoner(Region.euw, "StopOFlop");
 ```
 
+To check if summoner exist:
+```c#
+  var summoner = api.GetSummoner(Region.euw, "StopOFlop");
+  if(summoner.Response == null)
+    //Summoner Exist do ur work
+    else
+    //Summoner not exist check Response to send message 
+  
+```
+
 To get the stats in ranked for a specific champion for this summoner:
 ```c#
 var varusRanked = summoner.GetStatsRanked(Season.Season3)
