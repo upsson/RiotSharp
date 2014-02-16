@@ -30,6 +30,14 @@ namespace RiotSharp
         /// <summary>
         /// Turkey.
         /// </summary>
-        tr
+        tr,
+        /// <summary>
+        /// Latin America north.
+        /// </summary>
+        lan,
+        /// <summary>
+        /// Latin America South.
+        /// </summary>
+        las
     }
 }
