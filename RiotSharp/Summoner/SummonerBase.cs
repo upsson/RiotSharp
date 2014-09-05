@@ -33,6 +33,8 @@ namespace RiotSharp
         private const string TeamRootV22Url = "/api/lol/{0}/v2.2/team";
         private const string TeamRootUrl = "/api/lol/{0}/v2.3/team";
         private const string TeamBySummonerUrl = "/by-summoner/{0}";
+        
+        private const string MatchHistoryRootUrl = "/api/lol/{0}/v2.2/matchhistory/";
 
         [field: NonSerialized]
         private RateLimitedRequester requester;
@@ -409,6 +411,26 @@ namespace RiotSharp
                 string.Format(TeamRootV22Url, Region) + string.Format(TeamBySummonerUrl, Id),
                 Region);
             return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<TeamV22>>(json));
+        }
+        
+         /// <summary>
+        /// Get Match History information for this summoner synchronously.
+        /// </summary>
+        /// <returns>List of Match.</returns>
+        public List<MatchSummary> GetMatchHistory()
+        {
+            var json = requester.CreateRequest(string.Format(MatchHistoryRootUrl, Region) + Id);
+            return JsonConvert.DeserializeObject<PlayerHistory>(json).MatchSummary;
+        }
+
+        /// <summary>
+        /// Get Match History information for this summoner Asynchronously.
+        /// </summary>
+        /// <returns>List of Match.</returns>
+        public async Task<List<PlayerHistory>> GetMatchHistoryAsync()
+        {
+            var json = await requester.CreateRequestAsync(string.Format(MatchHistoryRootUrl, + Id));
+            return await JsonConvert.DeserializeObjectAsync<List<PlayerHistory>>(json);
         }
     }
 }
